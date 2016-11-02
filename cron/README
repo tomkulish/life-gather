@@ -1,0 +1,5 @@
+List of cron scripts
+
+mosquitto.py
+------------------------
+pip install paho-mqtt
