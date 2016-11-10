@@ -1,5 +1,21 @@
 Testing out facial recogonition using Python
 
+=Thought Process on Overall Architecture
+Two major parts
+Model Building
+# Build a model and save it in a directory. Using good sets of pictures gradually updated.
+# Use train/test to see how this model is doing over time.
+
+Scoring and Saving
+# A program to periodically go grab data from Google Drive (Photos) (maybe the last day)
+# Saves them in a directory for unprocessed
+# Something scores those files one by one.
+# If a picture hits a match on (1) it saves that in the 1 directory
+# Optional: Emails to say there are new files for viewing
+
+View
+# A python page to view things in the 1 directory, password protected with thumbnails. Ordered by Date? 
+
 Method One:
 http://scikit-learn.org/stable/auto_examples/applications/face_recognition.html
 Python Installation Requirements

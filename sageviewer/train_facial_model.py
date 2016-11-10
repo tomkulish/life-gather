@@ -5,11 +5,14 @@ import urllib
 import json
 import cv2
 from PIL import Image
+import time
 
 # define the path to the face detector
 FACE_DETECTOR_PATH = "/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(FACE_DETECTOR_PATH);
 recognizer = cv2.face.createLBPHFaceRecognizer()
+
+modelSaveLocation = "models/"
 
 def grab_image(path=None, stream=None, url=None):
     # if the path is not None, then load the image from disk
@@ -69,6 +72,8 @@ def get_images_and_labels(path, nbr):
     # return the images list and labels list
     return images, labels
 
+print "Running facial recongition tests"
+print "Gathering data #############################################"
 #images, labels = get_images_and_labels('/home/tkulish/life-gather/sageviewer/train-images')
 images, labels = get_images_and_labels('/home/tkulish/life-gather/sageviewer/train-olivia', 1)
 images2, labels2 = get_images_and_labels('/home/tkulish/life-gather/sageviewer/train-tom', 2)
@@ -76,12 +81,16 @@ images.extend(images2)
 labels.extend(labels2)
 print labels
 
+print "Training models ############################################"
 # Train the model using a dataset in 
 recognizer.train(images, np.array(labels))
+now = str(time.time())
+recognizer.save(modelSaveLocation + "/" + now + ".model")
 
+print "Testing Models #############################################"
 # Append the images with the extension .sad into image_paths
-path = '/home/tkulish/life-gather/sageviewer/train-images'
-image_paths = [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.test')]
+path = '/home/tkulish/life-gather/sageviewer/test-all'
+image_paths = [os.path.join(path, f) for f in os.listdir(path)]
 for image_path in image_paths:
     print("path:" + image_path)
     image = cv2.imread(image_path,cv2.IMREAD_GRAYSCALE)
@@ -94,11 +103,7 @@ for image_path in image_paths:
         nbr_predicted = result.getLabel()
         conf = result.getDist()
         #nbr_predicted = recognizer.predict(predict_image[y: y + h, x: x + w])
-        nbr = os.path.split(image_path)[1].split(".")[0]
-        if nbr == "olivia":
-            nbr = 1
-        else:
-            nbr = 2
+        nbr = int(os.path.split(image_path)[1].split(".")[0])
         if nbr == nbr_predicted:
             print "{} is Correctly Recognized with confidence {}".format(nbr, conf)
         else:
