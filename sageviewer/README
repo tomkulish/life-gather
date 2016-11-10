@@ -2,6 +2,7 @@ Testing out facial recogonition using Python
 
 =Thought Process on Overall Architecture
 Two major parts
+
 Model Building
 # Build a model and save it in a directory. Using good sets of pictures gradually updated.
 # Use train/test to see how this model is doing over time.
