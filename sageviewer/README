@@ -17,6 +17,7 @@ Scoring and Saving
 View
 # A python page to view things in the 1 directory, password protected with thumbnails. Ordered by Date? 
 
+############################
 Method One:
 http://scikit-learn.org/stable/auto_examples/applications/face_recognition.html
 Python Installation Requirements
