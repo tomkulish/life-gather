@@ -1,4 +1,5 @@
 # http://hanzratech.in/2015/02/03/face-recognition-using-opencv.html
+# TODO: Add header and python bash
 import numpy as np
 import os
 import urllib
@@ -14,6 +15,7 @@ recognizer = cv2.face.createLBPHFaceRecognizer()
 
 modelSaveLocation = "models/"
 
+# TODO: Comments
 def grab_image(path=None, stream=None, url=None):
     # if the path is not None, then load the image from disk
     if path is not None:
@@ -33,6 +35,7 @@ def grab_image(path=None, stream=None, url=None):
     # return image
     return image
 
+# TODO: Comments
 def find_faces(image):
     print FACE_DETECTOR_PATH
     # convert the image to grayscale, load the face cascade detector,
@@ -48,6 +51,7 @@ def find_faces(image):
     data ={"num_faces": len(rects), "faces": rects, "success": True}
     print data
 
+# TODO: Comments and cleanup
 def get_images_and_labels(path, nbr):
     image_paths = [os.path.join(path, f) for f in os.listdir(path) if not f.endswith('.test')]
 
@@ -72,6 +76,7 @@ def get_images_and_labels(path, nbr):
     # return the images list and labels list
     return images, labels
 
+# TODO: Move these into a function and a main
 print "Running facial recongition tests"
 print "Gathering data #############################################"
 #images, labels = get_images_and_labels('/home/tkulish/life-gather/sageviewer/train-images')
